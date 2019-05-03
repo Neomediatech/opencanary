@@ -22,8 +22,8 @@ services:
       << : *common-vars
     stop_grace_period: 20s
     ports:
-      - target: 5000
-        published: 25000
+      - target: 5900
+        published: 25900
         protocol: tcp
         mode: host
       - target: 3306
