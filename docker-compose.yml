@@ -20,7 +20,7 @@ services:
     <<: *default-opts    
     environment:
       << : *common-vars
-    stop_grace_period: 1m
+    stop_grace_period: 20s
     ports:
       - target: 5000
         published: 25000
