@@ -1,0 +1,70 @@
+# use to create a swarm template in Portainer
+version: '3.7'
+
+x-default-opts: 
+  &default-opts
+  deploy:
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      max_attempts: 3
+      window: 20s
+
+x-environment: &common-vars
+    TZ: Europe/Rome
+
+services:
+  opencanary:
+    image: opencanary:latest
+    hostname: opencanary
+    <<: *default-opts    
+    environment:
+      << : *common-vars
+    stop_grace_period: 1m
+    ports:
+      - target: 5000
+        published: 25000
+        protocol: tcp
+        mode: host
+      - target: 3306
+        published: 23306
+        protocol: tcp
+        mode: host    
+      - target: 6379
+        published: 26379
+        protocol: tcp
+        mode: host    
+      - target: 1433
+        published: 21433
+        protocol: tcp
+        mode: host
+      - target: 3389
+        published: 23389
+        protocol: tcp
+        mode: host
+      - target: 5060
+        published: 25060
+        protocol: udp
+        mode: host    
+      - target: 69
+        published: 269
+        protocol: udp
+        mode: host
+      - target: 161
+        published: 2161
+        protocol: udp
+        mode: host
+      - target: 123
+        published: 2123
+        protocol: udp
+        mode: host
+    volumes:
+      - logs:/data
+
+volumes:
+  logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/data/honeypot/logs
