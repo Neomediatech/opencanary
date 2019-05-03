@@ -60,6 +60,7 @@ services:
         mode: host
     volumes:
       - logs:/data
+      - /srv/data/honeypot/opencanary/conf/opencanary.conf:/root/.opencanary.conf
 
 volumes:
   logs:
