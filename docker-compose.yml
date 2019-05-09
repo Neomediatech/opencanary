@@ -22,6 +22,18 @@ services:
       << : *common-vars
     stop_grace_period: 20s
     ports:
+      - target: 21
+        published: 2021
+        protocol: tcp
+        mode: host
+      - target: 22
+        published: 2022
+        protocol: tcp
+        mode: host
+      - target: 23
+        published: 2023
+        protocol: tcp
+        mode: host
       - target: 5900
         published: 25900
         protocol: tcp
@@ -40,6 +52,10 @@ services:
         mode: host
       - target: 3389
         published: 23389
+        protocol: tcp
+        mode: host
+      - target: 8080
+        published: 18080
         protocol: tcp
         mode: host
       - target: 69
