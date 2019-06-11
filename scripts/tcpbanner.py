@@ -104,13 +104,13 @@ class TCPBannerProtocol(Protocol):
             if send_log:
                 self.factory.canaryservice.log(logdata, transport=self.transport)
 
-            self.transport.write(self.send_banner)
             if self.prompts > 3:
                 self.transport.write('\nAuth Failed\n')
                 self.transport.loseConnection()
             else:
                 self.prompts += 1
-
+                self.transport.write(self.send_banner)
+            
         except (UnsupportedVersion, ProtocolError):
             self.transport.loseConnection()
             return
@@ -139,7 +139,7 @@ class TCPBannerFactory(Factory):
                                  self.send_banner,self.alert_string_enabled,
                                  self.alert_string, self.keep_alive_enabled,
                                  self.keep_alive_secret, self.keep_alive_idle,
-                                 self.keep_alive_interval, self.keep_alive_probes)
+                                 self.keep_alive_interval, self.keep_alive_probes) set timeout
 
 
 class CanaryTCPBanner(CanaryService):
