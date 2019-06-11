@@ -23,6 +23,7 @@ COPY conf/opencanary.conf /root/.opencanary.conf
 COPY conf/supervise-opencanary.conf /etc/supervisor/conf.d/supervise-opencanary.conf
 COPY scripts/startcanary.sh /opt/opencanary/scripts/startcanary.sh
 COPY scripts/logger.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/opencanary/logger.py
+COPY scripts/vnc.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/opencanary/modules/vnc.py
 RUN chmod +x /opt/opencanary/scripts/startcanary.sh && chmod 777 /data
 
 #CMD ["/usr/bin/supervisord", "-n"]
