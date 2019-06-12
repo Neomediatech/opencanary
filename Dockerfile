@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stable-slim
 LABEL maintainer="docker-dario@neomediatech.it"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -7,8 +7,8 @@ ENV TZ=Europe/Rome
 RUN echo $TZ > /etc/timezone && \
     rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update && \
-    apt-get install -y tzdata sudo vim build-essential tcpdump libpcap-dev libffi-dev \
-    libssl-dev python-dev python-setuptools python-pip python-virtualenv supervisor && \
+    apt-get install -y tzdata sudo build-essential tcpdump libpcap-dev libffi-dev \
+    libssl-dev python-dev python-setuptools python-pip python-virtualenv && \
     rm -rf /var/lib/apt/lists* && \
     mkdir -p /opt/opencanary && virtualenv -p python /opt/opencanary/virtualenv && \
     source /opt/opencanary/virtualenv/bin/activate && \
@@ -22,12 +22,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists*
 
 COPY conf/opencanary.conf /root/.opencanary.conf
-COPY conf/supervise-opencanary.conf /etc/supervisor/conf.d/supervise-opencanary.conf
 COPY scripts/startcanary.sh /opt/opencanary/scripts/startcanary.sh
 COPY scripts/logger.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/opencanary/logger.py
 COPY scripts/tcpbanner.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/opencanary/modules/tcpbanner.py
-#COPY scripts/vnc.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/opencanary/modules/vnc.py
 RUN chmod +x /opt/opencanary/scripts/startcanary.sh && chmod 777 /data
 
-#CMD ["/usr/bin/supervisord", "-n"]
 CMD ["/opt/opencanary/scripts/startcanary.sh"]
