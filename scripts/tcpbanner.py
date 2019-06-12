@@ -139,7 +139,7 @@ class TCPBannerFactory(Factory):
                                  self.send_banner,self.alert_string_enabled,
                                  self.alert_string, self.keep_alive_enabled,
                                  self.keep_alive_secret, self.keep_alive_idle,
-                                 self.keep_alive_interval, self.keep_alive_probes) set timeout
+                                 self.keep_alive_interval, self.keep_alive_probes)
 
 
 class CanaryTCPBanner(CanaryService):
