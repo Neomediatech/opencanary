@@ -15,7 +15,7 @@ x-environment: &common-vars
 
 services:
   opencanary:
-    image: neomediatech/opencanary-honey-debian:latest
+    image: neomediatech/opencanary:latest
     hostname: opencanary
     <<: *default-opts    
     environment:
