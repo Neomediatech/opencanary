@@ -1,5 +1,5 @@
 ## Opencanary Docker
-HoneyPot docker container from Opencanary
+HoneyPot docker container from Opencanary built up on Ubuntu
 
 ### ToDO
 Someone may port it to Python3
