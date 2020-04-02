@@ -32,4 +32,4 @@ COPY scripts/logger.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/op
 COPY scripts/tcpbanner.py /opt/opencanary/virtualenv/lib/python2.7/site-packages/opencanary/modules/tcpbanner.py
 RUN chmod +x /opt/opencanary/scripts/startcanary.sh && chmod 777 /data
 
-CMD ["/opt/opencanary/scripts/startcanary.sh"]
+CMD ["/tini","--","/opt/opencanary/scripts/startcanary.sh"]
