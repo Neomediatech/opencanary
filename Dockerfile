@@ -1,6 +1,6 @@
-FROM neomediatech/ubuntu-base:latest
+FROM neomediatech/ubuntu-base:18.04
 
-ENV VERSION=0.5.2 \
+ENV VERSION=0.6.2 \
     DEBIAN_FRONTEND=noninteractive \
     SERVICE=opencanary
 
@@ -20,11 +20,13 @@ RUN apt update && apt -y dist-upgrade && \
     pip install pip --upgrade && \
     pip install opencanary && \
     pip install scapy pcapy && \
-    pip install rdpy && \
     mkdir -p /opt/opencanary/scripts /data && touch /data/opencanary.log && chmod 666 /data/opencanary.log && \
     apt -y purge build-essential libpcap-dev libffi-dev libssl-dev python-dev && \
     apt -y autoremove --purge && \
     rm -rf /var/lib/apt/lists*
+
+#    pip install rdpy && \
+# ERROR: Package 'rsa' requires a different Python: 2.7.17 not in '>=3.5, <4'
 
 COPY conf/opencanary.conf /root/.opencanary.conf
 COPY scripts/startcanary.sh /opt/opencanary/scripts/startcanary.sh
