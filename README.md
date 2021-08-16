@@ -1,3 +1,5 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/neomediatech/opencanary.svg?style=plastic)](https://hub.docker.com/r/neomediatech/opencanary/)
+
 ## Opencanary Docker
 HoneyPot docker container from Opencanary built up on Ubuntu
 
