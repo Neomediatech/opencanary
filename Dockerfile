@@ -1,6 +1,6 @@
 FROM neomediatech/ubuntu-base:18.04
 
-ENV VERSION=0.6.2 \
+ENV VERSION=0.6.3 \
     DEBIAN_FRONTEND=noninteractive \
     SERVICE=opencanary
 
@@ -11,9 +11,9 @@ LABEL maintainer="docker-dario@neomediatech.it" \
       org.label-schema.maintainer=Neomediatech
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh 
-RUN apt update && apt -y dist-upgrade && \
-    apt install -y --no-install-recommends sudo build-essential tcpdump libpcap-dev libffi-dev \
-    libssl-dev python-dev python-setuptools python-pip python-virtualenv virtualenv && \
+RUN apt-get update && apt-get -y dist-upgrade && \
+    apt-get install -y --no-install-recommends sudo build-essential tcpdump libpcap-dev libffi-dev \
+    libssl-dev python-dev python-setuptools python3-pip python3-virtualenv virtualenv iptables && \
     mkdir -p /opt/opencanary && \
     virtualenv -p python /opt/opencanary/virtualenv && \
     source /opt/opencanary/virtualenv/bin/activate && \
@@ -21,8 +21,8 @@ RUN apt update && apt -y dist-upgrade && \
     pip install opencanary && \
     pip install scapy pcapy && \
     mkdir -p /opt/opencanary/scripts /data && touch /data/opencanary.log && chmod 666 /data/opencanary.log && \
-    apt -y purge build-essential libpcap-dev libffi-dev libssl-dev python-dev && \
-    apt -y autoremove --purge && \
+    apt-get -y purge build-essential libpcap-dev libffi-dev libssl-dev python-dev && \
+    apt-get -y autoremove --purge && \
     rm -rf /var/lib/apt/lists*
 
 #    pip install rdpy && \
